@@ -4,6 +4,8 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import {Doughnut} from 'react-chartjs-2'
 import {motion} from 'framer-motion'
 import Tilt from 'react-parallax-tilt'
+import { Grid, Typography } from '@mui/material';
+import Comparison from './Comparison.gif'
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -90,6 +92,26 @@ function MyPortfolio() {
         Invest in Others
       </motion.button>
       </div>
+      <div className="flex justify-center m-10 gap-10">
+      <motion.div
+        className="w-1/2 h-96 bg-cover bg-center flex items-center justify-center"
+        style={{ backgroundImage: "url('https://via.placeholder.com/500')" }}
+        initial={{ opacity: 0, scale: 0.5 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.5 }}
+      >
+        <h2 className="text-white text-4xl font-bold">Column 1</h2>
+      </motion.div>
+      <motion.div
+        className="w-1/2 h-96 bg-cover bg-center flex items-center justify-center"
+        style={{ backgroundImage: `url(${Comparison})` }}
+        initial={{ opacity: 0, scale: 0.5 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.5 }}
+      >
+        <h2 className="text-white text-4xl font-bold">Column 2</h2>
+      </motion.div>
+    </div>
     </div>
   );
 }
