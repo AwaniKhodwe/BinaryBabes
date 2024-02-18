@@ -12,6 +12,9 @@ import { VscGraphLine } from "react-icons/vsc";
 import { RiFundsBoxFill } from "react-icons/ri";
 import { MdGpsFixed } from "react-icons/md";
 import LoginForm from "../../components/LoginSignup"
+import Typewriter from 'typewriter-effect';
+import { FiActivity } from "react-icons/fi";
+
 
 function LandingPage() {
 
@@ -35,19 +38,45 @@ function LandingPage() {
       <Navbar/>
       <section id='getstarted'>
           <div className="flex items-center justify-center h-screen">
-          <div className='grid grid-cols-2 gap-24'>
+          <div className='grid grid-cols-2 gap-24 place-items-center'>
               <motion.div
                 initial={{ opacity: 0, y: -50 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
-                className="text-center mt-20"
+                className="text-center mt-20 grid place-items-center"
               >
-                <h1 className="text-7xl font-bold">
-                  <span className="block">Portfolio</span>
-                  <span className="block">Management</span>
+                <h1 className="text-9xl font-bold ">
+                <motion.div 
+                    className="w-20 h-20 p-5 my-5 mx-5 ml-44 flex items-center justify-center text-white bg-black"
+                    animate={{
+                      scale: [1, 1, 1.3, 1.3, 1],
+                      rotate: [0, 0, 180, 180, 0],
+                      borderRadius: ["0%", "0%", "50%", "50%", "0%"]
+                    }}
+                    transition={{
+                      duration: 2,
+                      ease: "easeInOut",
+                      times: [0, 0.2, 0.5, 0.8, 1],
+                      repeat: Infinity,
+                      repeatDelay: 1
+                    }}>
+                      <FiActivity />
+                </motion.div>
+                  <span className="block">Sharpe</span>
                 </h1>
-                <p className="text-lg my-8 text-gray-500">Your financial journey starts here.</p>
-                <button onClick={handleGetStartedClick} className="px-6 py-2 bg-blue-500 text-white rounded-lg shadow-lg hover:bg-blue-600 transition-colors duration-300">
+                {/* <p className="text-3xl my-8 text-gray-500">Invest Sharply.</p> */}
+                <div className='m-5 text-4xl '>
+                <Typewriter
+              options={{
+                strings: ['Invest Sharply.'],
+                autoStart: true,
+                loop: true,
+              }}
+            />
+                </div>
+                
+                <button onClick={handleGetStartedClick} className="px-20 mb-36 m-5 py-4 bg-violet text-white rounded-lg shadow-lg hover:bg-violet/70 transition-colors duration-300">
+                  
                   Get Started
                 </button>
                 </motion.div>
@@ -90,7 +119,7 @@ function LandingPage() {
                     <RiFundsBoxFill className='mr-5'/> Mutual Funds
                 </div>
                 <div className="stats flex place-items-center shadow-md border shadow-gray-800 text-gray-800 w-3/5 bg-white p-3 m-3 rounded-lg transition duration-300 ease-in-out hover:border hover:shadow-gray-800">
-                    <MdGpsFixed className='mr-5'/>Fixed Deposits
+                    <MdGpsFixed className='mr-5'/>Bonds
                 </div>
         </motion.div>
         <motion.div className='mb-24 grid place-items-center'>

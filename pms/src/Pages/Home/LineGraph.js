@@ -27,7 +27,7 @@ const LineGraph = ({ data }) => {
           name: customGraphNames[index],
         }))}
         layout={{
-          title: 'Line Graphs',
+          title: 'Predicted Apple Stock Price',
           xaxis: { title: 'X-axis' },
           yaxis: { title: 'Y-axis' },
         }}

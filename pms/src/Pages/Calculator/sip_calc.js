@@ -69,12 +69,8 @@ function SIP() {
   return (
     <div className='font-sans pt-4'>
       <Navbar />
-      <div className='mx-auto s_card1 s_heading p-4'>
-        <h1 className='text-justify mb-2 text-base'>What is SIP - Systematic Investment Plan</h1>
-        <p className='text-justify font-thin text-sm'>Systematic Investment Plan, commonly referred to as SIP, is a preferred mode of investment offered by mutual fund companies that allows you to invest money regularly. The power of compounding enables to grow your funds over time to a sizeable corpus.</p>
-      </div>
-      <div className='mt-4  ml-12 s_card2 mx-auto p-4 s_heading'>
-        <h1 className='text-justify'>SIP Calculator</h1>
+      <div className='mt-8 mx-12 s_card2 mx-auto p-10 s_heading border-2 rounded-lg shadow-md border shadow-gray-800'>
+        <h1 className='text-justify font-bold text-xl'>SIP Calculator</h1>
         <div className='flex mt-2'>
           <div>
             <div className='flex mt-2'>
@@ -164,8 +160,8 @@ function SIP() {
               </div>
             </div>
           </div>
-          <div className='div_right mb-4'>
-            <div className='s_circle transform hover:scale-110 duration-300 ease-in-out ml-24' >
+          <div className='div_right'>
+            <div className='s_circle transform hover:scale-110 duration-300 ease-in-out ml-48' >
               <CircularProgressbarWithChildren
                 value={calculateTotalInv() * 100 / calculateSIP()} styles={buildStyles({
                   strokeLinecap: "butt",
@@ -179,7 +175,7 @@ function SIP() {
                 </div>
               </CircularProgressbarWithChildren>
             </div>
-            <div className='text-justify text-sm font-thin pl-4 flex'>
+            <div className='text-justify text-sm font-thin pl-4 flex ml-48'>
               <div>
                 <ul className='list-disc'>
                   <li className='text-slate-600 mb-2 mt-4' style={{ color: "#8684BF" }}>Invested Amount</li>

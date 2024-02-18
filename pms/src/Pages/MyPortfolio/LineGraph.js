@@ -27,7 +27,7 @@ const LineGraph = ({ data }) => {
           name: customGraphNames[index],
         }))}
         layout={{
-          title: 'Line Graphs',
+          title: 'Progress',
           xaxis: { title: 'X-axis' },
           yaxis: { title: 'Y-axis' },
           animate: true, // Enable animation
@@ -36,6 +36,7 @@ const LineGraph = ({ data }) => {
             easing: 'ease-in-out', // Animation easing function
           },
         }}
+        
       />
     </div>
   );

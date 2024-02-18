@@ -2,6 +2,7 @@ import React from "react";
 import { FaLink,FaLinkedin } from "react-icons/fa";
 import { useState } from "react";
 import {motion} from 'framer-motion'
+import { FiActivity } from "react-icons/fi";
 
 function Navbar() {
 
@@ -17,8 +18,9 @@ function Navbar() {
 
   return (
     <div className="Navbar justify-between flex align-middle bg-[#0c0c1d]">
+      <div className="text-white flex items-center justify-center font-bold text-xl">
       <motion.div 
-          className="w-9 h-9 bg-white my-3 mx-5"
+          className="w-9 h-9 bg-white my-3 mx-5 flex items-center justify-center text-black"
           animate={{
             scale: [1, 1, 1.3, 1.3, 1],
             rotate: [0, 0, 180, 180, 0],
@@ -31,12 +33,13 @@ function Navbar() {
             repeat: Infinity,
             repeatDelay: 1
           }}>
+            <FiActivity />
       </motion.div>
+      Sharpe
+      </div>
       <div className="Menu flex mr-5 gap-2 self-center">
-          <motion.a href='#about' smooth={true} duration={500} className='px-2 py-1 rounded-md text-white'
-            whileHover={{ backgroundColor: '#ffffff', color: '#000000'}}>About</motion.a>
-          <motion.a href='#projects' smooth={true} duration={500} className='px-2 py-1 rounded-md text-white'
-            whileHover={{ backgroundColor: '#ffffff', color: '#000000'}}>Projects</motion.a>
+          <motion.a href='/home' smooth={true} duration={500} className='px-2 py-1 rounded-md text-white'
+            whileHover={{ backgroundColor: '#ffffff', color: '#000000'}}>Home</motion.a>
         </div>
 
     </div>

@@ -11,6 +11,7 @@ import Calculator from './Calculator.json'
 import LineGraph from './LineGraph';
 import StockPrices from './StockPrices';
 import Prediction from './Prediction.png'
+import { useNavigate } from 'react-router'; 
 
 function HomePage() {
 
@@ -72,6 +73,22 @@ function HomePage() {
     setPredict(true);
   };
 
+  const navigate = useNavigate()
+  const handleNavigatePortfolio =  () => {
+
+      navigate('/myportfolio');
+  }
+
+  const handleNavigateResources =  () => {
+
+    navigate('/resources');
+}
+
+const handleNavigateCalculator =  () => {
+
+  navigate('/calculator');
+}
+  
   return (
     <div className="HomePage">
       <Navbar/>
@@ -79,14 +96,15 @@ function HomePage() {
       {/* <div className='m-10'>
       <canvas id="myChart" width="400" height="400"></canvas>
     </div> */}
-    <div className='flex items-center justify-center mr-10 mt-10 gap-96'>
-    <LineGraph data={graphData} />
+    <h1 className='text-5xl mt-10 font-bold'>Trends</h1>
+    <div className='flex items-center  justify-center mx-10 mt-4 gap-80 border-2 border-black rounded-lg'>
+    <LineGraph data={graphData} className=''/>
     <div className="scrollable-div" style={{ overflowY: 'scroll', height: '400px' }}>
       <motion.div
         className="progress-bar"
         style={{ scaleX: scrollYProgress }}
       />
-      <StockPrices stockPrices={stockPrices} />
+      <StockPrices stockPrices={stockPrices} className=''/>
       {/* Repeat the paragraph as needed */}
     </div >
     
@@ -105,7 +123,7 @@ function HomePage() {
         transition={{ duration: 0.5 }}
         className="m-10 items-center"
       >
-        <div className="flex flex-col items-center">
+        <div onClick={()=>handleNavigatePortfolio()} className="flex flex-col items-center ">
           <Lottie
             options={{
               loop: true,
@@ -118,7 +136,8 @@ function HomePage() {
             height={300}
             width={300}
           />
-          <Tilt className='bg-[#1f1a26] flex justify-center items-center p-5 text-white text-2xl font-bold rounded-lg w-300'>
+          <Tilt className='bg-[#1f1a26] flex justify-center items-center p-5 text-white text-2xl font-bold rounded-lg w-300'
+          >
             My Portfolio
           </Tilt>
         </div>
@@ -129,7 +148,7 @@ function HomePage() {
         transition={{ duration: 0.5 }}
         className="m-10 justify-center items-center"
       >
-        <div className="flex flex-col justify-center items-center">
+        <div className="flex flex-col justify-center items-center" onClick={()=>handleNavigateResources()}>
           <Lottie
             options={{
               loop: true,
@@ -153,12 +172,12 @@ function HomePage() {
         transition={{ duration: 0.5 }}
         className="m-10 items-center"
       >
-        <div className="flex flex-col items-center mt-10">
+        <div className="flex flex-col items-center mt-10" onClick={()=>handleNavigateCalculator()}>
           <Lottie
             options={{
               loop: true,
               autoplay: true,
-              animationData: Calculator,
+              animationData: Profile,
               rendererSettings: {
                 preserveAspectRatio: 'xMidYMid slice',
               },

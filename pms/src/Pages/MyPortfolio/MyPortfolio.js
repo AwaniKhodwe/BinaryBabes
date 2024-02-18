@@ -30,6 +30,21 @@ function MyPortfolio() {
   const [showBondsData, setShowBondsData] = useState(false);
   const [file, setFile] = useState(null);
   const [sums, setSums] = useState(null);
+  const [number, setNumber] = useState('');
+
+  const handleInputChange = (event) => {
+    setNumber(event.target.value);
+  };
+
+  const handleSubmit = () => {
+    // You can use the 'number' variable here for further processing
+    console.log('The entered number is:', number);
+    if (parseInt(number) < 200) {
+      console.log('Number is less than 200');
+      alert('Stop Loss Reached!!!!'); // Display an alert on the screen
+    }
+  
+  };
 
   const handleFileChange = (event) => {
     setFile(event.target.files[0]);
@@ -152,8 +167,9 @@ function MyPortfolio() {
         <h1 className="text-2xl font-bold mt-10 ml-10">My Portfolio</h1>
         <div>
         <div style={{ position: 'relative' }}>
-  <input id="file-upload" type="file" onChange={handleFileChange} style={{ display: 'none' }} />
-  <button className='bg-violet text-white w-24 h-8 rounded-md m-4' onClick={() => document.getElementById('file-upload').click()}>Import CSV</button>
+        <input type="file" onChange={handleFileChange} />
+        <button onClick={handleUpload}>Upload</button>
+
 </div>
       {/* {sums && (
         <div>
@@ -238,11 +254,17 @@ function MyPortfolio() {
       Put in a random value for a stock, we have set a stop loss value. If the stock value falls below the stop loss value, we will notify you about it!
       </p>
     </div>
-    <div className="flex justify-center items-center mt-2">
-  <input type="number" className="border border-gray-300 rounded-lg p-2 mr-2 text-center" />
-  <button className="bg-violet hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
-    Try Out
-  </button>
+    <div className="flex justify-center items-center mt-8">
+  <input type="number" 
+        className="border border-gray-300 rounded-lg p-2 mr-2 text-center" 
+        value={number}
+        onChange={handleInputChange} />
+  <button 
+        className="bg-black hover:bg-black/70 text-white font-bold py-2 px-4 rounded"
+        onClick={handleSubmit}
+      >
+        Try Out
+      </button>
 </div>
 
   </div>
@@ -289,20 +311,20 @@ function MyPortfolio() {
     </div>
     {showProgress && <LineGraph data={graphData} />}
     {showComp && 
-      <div className='flex items-center justify-center m-10'>
+      <div className='flex items-center justify-center m-10 gap-5'>
           <LineGraphNifty data={graphDataNifty} />
           <LineGraphTesla data={graphDataTesla} />
         </div>}
     {showOpti && 
-      <div className='flex items-center justify-center m-10'>
-          <LineGraphBar data={graphDataBar} className='w-1/2'/>
-          <div >
-            <h1 className='text-2xl font-bold'>Expected Annual Return </h1>
-            <p>0.0461</p>
-            <h1 className='text-2xl font-bold'>Expected Volatility </h1>
-            <p>0.1040</p>
-            <h1 className='text-2xl font-bold'>Sharp Ratio </h1>
-            <p>0.3473</p>
+      <div className='grid grid-cols-2 m-10 place-items-center border-2'>
+          <LineGraphBar data={graphDataBar} className='w-1/2 border p-5'/>
+          <div className='border-2 p-12 bg-lavendar rounded-lg shadow-md border shadow-gray-800' >
+            <h1 className='text-2xl '>Expected Annual Return </h1>
+            <p className='text-3xl font-bold p-2'>0.0461</p>
+            <h1 className='text-2xl'>Expected Volatility </h1>
+            <p className='text-3xl font-bold p-2'>0.1040</p>
+            <h1 className='text-2xl'>Sharp Ratio </h1>
+            <p className='text-3xl font-bold p-2'>0.3473</p>
           </div>
         </div>}
 
