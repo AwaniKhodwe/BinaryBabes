@@ -1,17 +1,41 @@
-import React, { useState } from "react";
-import axios from 'axios'; // Import Axios for making HTTP requests
+// LoginForm.js
+
+import React, { useState } from 'react';
+import axios from 'axios';
 import Lottie from 'react-lottie';
-import waves from "../components/waves.json";
+import waves from './waves.json';
 import Typewriter from 'typewriter-effect';
+
+import { useNavigate } from 'react-router-dom';
+
+
+
 
 const LoginForm = () => {
   const [showLogin, setShowLogin] = useState(true);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [signupEmail, setSignupEmail] = useState("");
-  const [signupPassword, setSignupPassword] = useState("");
-  const [mobileNumber, setMobileNumber] = useState("");
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [signupEmail, setSignupEmail] = useState('');
+  const [signupPassword, setSignupPassword] = useState('');
+  const [mobileNumber, setMobileNumber] = useState('');
+  const [username, setUsername] = useState('');
+
+  const navigate = useNavigate();
+
+const handleNavigate = async (event) => {
+  event.preventDefault();
+  try {
+    if (showLogin) {
+      // Login logic
+    } else {
+      // Signup logic
+    }
+    // Navigate to '/home'
+    navigate('/home');
+  } catch (error) {
+    console.error('Error:', error.response.data);
+  }
+};
 
   const handleToggle = () => {
     setShowLogin(!showLogin);
@@ -47,22 +71,21 @@ const LoginForm = () => {
       if (showLogin) {
         // Login
         const response = await axios.post('http://localhost:5000/users/login', { email, password });
-        console.log(response.data); // Log response from the server
+        console.log(response.data);
       } else {
         // Signup
         const response = await axios.post('http://localhost:5000/users/register', { username, email: signupEmail, password: signupPassword, mobile: mobileNumber });
-        console.log(response.data); // Log response from the server
+        console.log(response.data);
       }
       // Reset form fields
-      setEmail("");
-      setPassword("");
-      setSignupEmail("");
-      setSignupPassword("");
-      setMobileNumber("");
-      setUsername("");
+      setEmail('');
+      setPassword('');
+      setSignupEmail('');
+      setSignupPassword('');
+      setMobileNumber('');
+      setUsername('');
     } catch (error) {
-      console.error('Error:', error.response.data); // Log error response from the server
-      // Handle error response from the server
+      console.error('Error:', error.response.data);
     }
   };
 
@@ -76,113 +99,114 @@ const LoginForm = () => {
   };
 
   return (
-    <div className="flex flex-row w-3/4 h-4/5 bg-white mx-auto my-auto rounded-lg relative">
-      <div className="flex flex-col w-3/5 h-full bg-lavendar rounded-lg rounded-tr-none rounded-br-none relative">
-        <Lottie
-          options={defaultOptions}
-          height={400}
-          width={518}
-          style={{ position: "absolute", bottom: 0 }} // Position Lottie at the bottom
-        />
-        <div className="absolute bottom-0 mb-4 ml-4" style={{ color: "white", fontSize: "48px" }}>
-          <Typewriter
-            options={{
-              strings: ["Grow.", "Invest.", "Thrive..."],
-              autoStart: true,
-              loop: true,
-            }}
+    <div className="fixed inset-0 flex justify-center items-center bg-gray-800 bg-opacity-75 z-50">
+      <div className="flex flex-col md:flex-row w-3/5 bg-white rounded-lg" style={{ "height": "420px" }}>
+        <div className="md:w-3/5 relative bg-lavendar rounded-lg">
+          <Lottie
+            options={defaultOptions}
+            height={400}
+            width={546}
+            style={{ position: 'absolute', bottom: 0, left: 0 }}
           />
-        </div>
-      </div>
-      <div className="flex flex-col mx-auto">
-        <div className="flex flex-row w-full mx-auto m-4">
-          <div className={`flex-row mx-auto w-1/2 ${showLogin ? 'bg-darkviolet text-white' : 'bg-lavendar text-black'} text-center p-2 rounded-3xl transition duration-500 ease-in-out`} onClick={() => setShowLogin(true)}>
-            <button style={{ width: "100%" }}>Login</button>
+          <div className="absolute bottom-0 mb-4 ml-4" style={{ color: 'white', fontSize: '48px' }}>
+            <Typewriter
+              options={{
+                strings: ['Grow.', 'Invest.', 'Thrive...'],
+                autoStart: true,
+                loop: true,
+              }}
+            />
           </div>
-          <div className={`flex-row w-1/2 ${showLogin ? 'bg-lavendar text-black' : 'bg-darkviolet text-white'} text-center p-2 rounded-3xl transition duration-500 ease-in-out`} onClick={() => setShowLogin(false)}>
-            <button style={{ width: "100%" }}>Sign Up</button>
-          </div>
         </div>
-        <div className="">
-          {showLogin ? (
-            <form onSubmit={handleSubmit} className="mx-auto my-2 p-12">
-              <div className="mb-2">
-                <label htmlFor="username" className="block text-black">Username:</label>
-                <input
-                  type="username"
-                  id="username"
-                  value={username}
-                  onChange={handleUsernameChange}
-                  className="p-2 w-full rounded-lg border border-black focus:outline-none focus:border-indigo-500"
-                  required
-                />
-              </div>
-              <div className="mb-4">
-                <label htmlFor="password" className="block text-black">Password:</label>
-                <input
-                  type="password"
-                  id="password"
-                  value={password}
-                  onChange={handlePasswordChange}
-                  className="px-4 py-2 w-full rounded-lg border border-black focus:outline-none focus:border-indigo-500"
-                  required
-                />
-              </div>
-              <div className="text-center">
-                <button type="submit" className="bg-darkviolet hover:bg-darkviolet/75 text-white py-2 px-4 rounded-full focus:outline-none focus:shadow-outline">Login</button>
-              </div>
-            </form>
-          ) : (
-            <form onSubmit={handleSubmit} className="mx-auto my-2 p-2">
-              <div className="">
-                <label htmlFor="username" className="block text-black">Username:</label>
-                <input
-                  type="text"
-                  id="username"
-                  value={username}
-                  onChange={handleUsernameChange}
-                  className="p-2 w-full rounded-lg border border-black focus:outline-none focus:border-indigo-500"
-                  required
-                />
-              </div>
-              <div className="">
-                <label htmlFor="email" className="block text-black">Email:</label>
-                <input
-                  type="email"
-                  id="email"
-                  value={signupEmail}
-                  onChange={handleEmailChange}
-                  className="p-2 w-full rounded-lg border border-black focus:outline-none focus:border-indigo-500"
-                  required
-                />
-              </div>
-              <div className="">
-                <label htmlFor="password" className="block text-black">Password:</label>
-                <input
-                  type="password"
-                  id="password"
-                  value={signupPassword}
-                  onChange={handlePasswordChange}
-                  className="p-2 w-full rounded-lg border border-black focus:outline-none focus:border-indigo-500"
-                  required
-                />
-              </div>
-              <div className="mb-2">
-                <label htmlFor="mobileNumber" className="block text-black">Mobile Number:</label>
-                <input
-                  type="text"
-                  id="mobileNumber"
-                  value={mobileNumber}
-                  onChange={handleMobileNumberChange}
-                  className="px-4 py-2 w-full rounded-lg border border-black focus:outline-none focus:border-indigo-500"
-                  required
-                />
-              </div>
-              <div className="text-center">
-                <button type="submit" className="bg-darkviolet hover:bg-darkviolet/75 text-white py-2 px-4 rounded-full focus:outline-none focus:shadow-outline">Sign Up</button>
-              </div>
-            </form>
-          )}
+        <div className="md:w-2/5 flex flex-col justify-center items-center p-4 h-full">
+          <div className="flex flex-row w-full mx-auto mb-4">
+            <button className={`w-1/2 py-2 rounded-tl-3xl rounded-bl-3xl ${showLogin ? 'bg-black text-white' : 'bg-gray-200 text-black'}`} onClick={() => setShowLogin(true)}>
+              Login
+            </button>
+            <button className={`w-1/2 py-2 rounded-tr-3xl rounded-br-3xl ${showLogin ? 'bg-gray-200 text-black' : 'bg-black text-white'}`} onClick={() => setShowLogin(false)}>
+              Sign Up
+            </button>
+          </div>
+          <form onSubmit={handleSubmit} className="w-full mx-auto">
+            {showLogin ? (
+              <>
+                <div className="mb-2">
+                  <label htmlFor="username" className="block text-black">Username:</label>
+                  <input
+                    type="username"
+                    id="username"
+                    value={username}
+                    onChange={handleUsernameChange}
+                    className="p-2 w-full rounded-lg border border-black focus:outline-none focus:border-indigo-500"
+                    required
+                  />
+                </div>
+                <div className="mb-2">
+                  <label htmlFor="password" className="block text-black">Password:</label>
+                  <input
+                    type="password"
+                    id="password"
+                    value={password}
+                    onChange={handlePasswordChange}
+                    className="p-2 w-full rounded-lg border border-black focus:outline-none focus:border-indigo-500"
+                    required
+                  />
+                </div>
+              </>
+            ) : (
+              <>
+                <div className="mb-2">
+                  <label htmlFor="username" className="block text-black">Username:</label>
+                  <input
+                    type="text"
+                    id="username"
+                    value={username}
+                    onChange={handleUsernameChange}
+                    className="p-2 w-full rounded-lg border border-black focus:outline-none focus:border-indigo-500"
+                    required
+                  />
+                </div>
+                <div className="mb-2">
+                  <label htmlFor="email" className="block text-black">Email:</label>
+                  <input
+                    type="email"
+                    id="email"
+                    value={signupEmail}
+                    onChange={handleEmailChange}
+                    className="p-2 w-full rounded-lg border border-black focus:outline-none focus:border-indigo-500"
+                    required
+                  />
+                </div>
+                <div className="mb-2">
+                  <label htmlFor="password" className="block text-black">Password:</label>
+                  <input
+                    type="password"
+                    id="password"
+                    value={signupPassword}
+                    onChange={handlePasswordChange}
+                    className="p-2 w-full rounded-lg border border-black focus:outline-none focus:border-indigo-500"
+                    required
+                  />
+                </div>
+                <div className="mb-2">
+                  <label htmlFor="mobileNumber" className="block text-black">Mobile Number:</label>
+                  <input
+                    type="text"
+                    id="mobileNumber"
+                    value={mobileNumber}
+                    onChange={handleMobileNumberChange}
+                    className="p-2 w-full rounded-lg border border-black focus:outline-none focus:border-indigo-500"
+                    required
+                  />
+                </div>
+              </>
+            )}
+            <div className="text-center">
+              <button type="submit" onClick={handleNavigate} className="bg-black hover:bg-gray-900 text-white py-2 px-4 rounded-full focus:outline-none focus:shadow-outline">
+                {showLogin ? 'Login' : 'Sign Up'}
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </div>

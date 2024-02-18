@@ -3,31 +3,26 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const userStocksSchema = new Schema({
-    userId: {
+    username: {
         type: String,
         required: true,
         unique: true,
         trim: true,
         minlength: 3
     },
-    stockName: {
+    assetname: {
         type: String,
         required: true,
         unique: true,
         minlength:5
     },
-    buyingPrice: {
-        type: Float32Array,
+    value: {
+        type: Number,
         required: true,
         unique: true,
         minlength:5
     },
-    quantity: {
-        type: Float32Array,
-        required: true,
-        unique: true,
-        minlength:5
-    },
+
 
 },
 {
